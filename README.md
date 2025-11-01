@@ -53,23 +53,66 @@ This is a classic number guessing game where the computer generates a random num
 
 ## 📦 Compilation
 
-### Windows (using MinGW/MSYS2 or Visual Studio)
+### ⚠️ Important: Static Linking for Portable Executables
 
+If you want to create an executable that works on other machines without requiring additional DLLs or runtime libraries, you must build with **static linking**. Use the build scripts provided below or the manual commands.
+
+### Quick Build (Using Build Scripts)
+
+#### Windows (MinGW/MSYS2) - **Recommended for Portability**
+```bash
+.\build-static.bat
+```
+
+#### Windows (MSVC/Visual Studio)
+```bash
+.\build-msvc-static.bat
+```
+
+#### Linux/macOS
+```bash
+chmod +x build-static.sh
+./build-static.sh
+```
+
+### Manual Compilation
+
+#### Windows (MinGW) - Static Linking (Portable)
+```bash
+g++ -std=c++17 -Wall -Wextra -pedantic -O3 -static -static-libgcc -static-libstdc++ -o number-guessing-game-static.exe main.cpp
+```
+
+#### Windows (MSVC) - Static Linking (Portable)
+```bash
+cl /std:c++17 /EHsc /O2 /MT /Fe:number-guessing-game-static.exe main.cpp
+```
+
+#### Linux/macOS - Static Linking
+```bash
+g++ -std=c++17 -Wall -Wextra -pedantic -O3 -static-libgcc -static-libstdc++ -o number-guessing-game-static main.cpp
+```
+
+### Regular Build (Requires Runtime Libraries on Target Machine)
+
+#### Windows (using MinGW/MSYS2 or Visual Studio)
 ```bash
 g++ -std=c++17 -Wall -Wextra -pedantic -O3 -o number-guessing-game.exe main.cpp
 ```
 
-### Linux/macOS
-
+#### Linux/macOS
 ```bash
 g++ -std=c++17 -Wall -Wextra -pedantic -O3 -o number-guessing-game main.cpp
 ```
 
-### Using Clang (alternative)
-
+#### Using Clang (alternative)
 ```bash
 clang++ -std=c++17 -Wall -Wextra -pedantic -O3 -o number-guessing-game main.cpp
 ```
+
+### 📦 Distribution Note
+
+- **Static Build**: Use the `-static` flags to create a portable executable that doesn't require any DLLs or runtime libraries. The executable will be larger (~1-2 MB) but completely self-contained.
+- **Dynamic Build**: Regular builds are smaller but require the C++ runtime libraries (e.g., `libstdc++-6.dll`, `libgcc_s_dw2-1.dll` for MinGW, or Visual C++ Redistributables for MSVC) to be installed on the target machine.
 
 ## 🚀 How to Run
 

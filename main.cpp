@@ -211,9 +211,9 @@ public:
 
 int main() {
     std::cout << "\n";
-    std::cout << "╔════════════════════════════════════════╗\n";
+    std::cout << "╔═══════════════════════════════════════╗\n";
     std::cout << "║   Welcome to Number Guessing Game!    ║\n";
-    std::cout << "╚════════════════════════════════════════╝\n";
+    std::cout << "╚═══════════════════════════════════════╝\n";
     
     auto [minRange, maxRange] = NumberGuessingGame::selectDifficulty();
     
