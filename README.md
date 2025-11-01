@@ -64,11 +64,6 @@ If you want to create an executable that works on other machines without requiri
 .\build-static.bat
 ```
 
-#### Windows (MSVC/Visual Studio)
-```bash
-.\build-msvc-static.bat
-```
-
 #### Linux/macOS
 ```bash
 chmod +x build-static.sh
@@ -80,11 +75,6 @@ chmod +x build-static.sh
 #### Windows (MinGW) - Static Linking (Portable)
 ```bash
 g++ -std=c++17 -Wall -Wextra -pedantic -O3 -static -static-libgcc -static-libstdc++ -o number-guessing-game-static.exe main.cpp
-```
-
-#### Windows (MSVC) - Static Linking (Portable)
-```bash
-cl /std:c++17 /EHsc /O2 /MT /Fe:number-guessing-game-static.exe main.cpp
 ```
 
 #### Linux/macOS - Static Linking
@@ -111,17 +101,27 @@ clang++ -std=c++17 -Wall -Wextra -pedantic -O3 -o number-guessing-game main.cpp
 
 ### 📦 Distribution Note
 
-- **Static Build**: Use the `-static` flags to create a portable executable that doesn't require any DLLs or runtime libraries. The executable will be larger (~1-2 MB) but completely self-contained.
+- **Static Build**: The build scripts create a portable executable (`number-guessing-game-static.exe`) that doesn't require any DLLs or runtime libraries. The executable will be larger (~3 MB) but completely self-contained and can run on any Windows machine without additional dependencies.
 - **Dynamic Build**: Regular builds are smaller but require the C++ runtime libraries (e.g., `libstdc++-6.dll`, `libgcc_s_dw2-1.dll` for MinGW, or Visual C++ Redistributables for MSVC) to be installed on the target machine.
 
 ## 🚀 How to Run
 
-### Windows
+### Windows (Using Static Build - Recommended)
+```bash
+.\number-guessing-game-static.exe
+```
+
+### Windows (If you built without static linking)
 ```bash
 .\number-guessing-game.exe
 ```
 
-### Linux/macOS
+### Linux/macOS (Using Static Build - Recommended)
+```bash
+./number-guessing-game-static
+```
+
+### Linux/macOS (If you built without static linking)
 ```bash
 ./number-guessing-game
 ```
@@ -184,9 +184,11 @@ Thanks for playing! Goodbye! 👋
 ```
 number-guessing-game/
 │
-├── main.cpp          # Main source file containing game logic
-├── README.md         # This file
-└── number-guessing-game(.exe)  # Compiled executable (generated)
+├── main.cpp                      # Main source file containing game logic
+├── build-static.bat              # Build script for Windows (static linking)
+├── build-static.sh               # Build script for Linux/macOS (static linking)
+├── README.md                     # This file
+└── number-guessing-game-static.exe  # Compiled static executable (generated)
 ```
 
 ## 🔧 Technical Details
